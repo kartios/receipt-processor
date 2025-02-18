@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,8 +17,8 @@ import java.util.UUID;
 public class Receipt {
     private UUID id;
     private String retailer;
-    private String purchaseDate;
-    private String purchaseTime;
+    private LocalDate purchaseDate;
+    private LocalTime purchaseTime;
     private List<Item> items;
     private String total;
 }

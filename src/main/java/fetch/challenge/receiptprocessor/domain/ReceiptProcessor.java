@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -70,13 +69,12 @@ public class ReceiptProcessor {
         points += 0;
 
         // 6 points if the day in the purchase date is odd.
-        if (Integer.parseInt(receipt.getPurchaseDate().split("-")[2]) % 2 == 1) {
+        if (receipt.getPurchaseDate().getDayOfMonth() % 2 == 1) {
             points += 6;
         }
 
         // 10 points if the time of purchase is after 2:00pm and before 4:00pm.
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime time = LocalTime.parse(receipt.getPurchaseTime(), dtf);
+        LocalTime time = receipt.getPurchaseTime();
         if (time.isAfter(LocalTime.of(14, 0)) && time.isBefore(LocalTime.of(16, 0))) {
             points += 10;
         }
