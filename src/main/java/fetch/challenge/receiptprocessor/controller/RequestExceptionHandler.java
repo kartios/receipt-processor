@@ -2,6 +2,7 @@ package fetch.challenge.receiptprocessor.controller;
 
 import fetch.challenge.receiptprocessor.controller.data.ErrorResponse;
 import fetch.challenge.receiptprocessor.domain.ReceiptNotFoundException;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +19,13 @@ public class RequestExceptionHandler {
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorResponse handleReceiptValidationError(MethodArgumentNotValidException ex) {
+        return new ErrorResponse("The receipt is invalid.");
+    }
+
+    @ResponseBody
+    @ResponseStatus(BAD_REQUEST)
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ErrorResponse handleReceiptValidationError(HttpMessageNotReadableException ex) {
         return new ErrorResponse("The receipt is invalid.");
     }
 
