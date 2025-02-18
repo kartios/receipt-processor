@@ -1,6 +1,7 @@
 package fetch.challenge.receiptprocessor.domain;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import fetch.challenge.receiptprocessor.domain.data.Receipt;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ class ReceiptProcessorTest {
     @Test
     void testGetPointsTarget() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("receiptTarget.json");
         Receipt receipt = objectMapper.readValue(inputStream, Receipt.class);
         receipt.setId(UUID.randomUUID());
@@ -34,6 +36,7 @@ class ReceiptProcessorTest {
     @Test
     void testGetPointsMM() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("receiptMM.json");
         Receipt receipt = objectMapper.readValue(inputStream, Receipt.class);
         receipt.setId(UUID.randomUUID());
