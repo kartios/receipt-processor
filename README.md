@@ -40,7 +40,7 @@ docker start docker-receipt-container
 
 ### Clean up docker environment
 
-Run these commands when done testing to delete the docker container and image
+Run these commands when done testing to delete the docker container and image.
 ```
 docker stop docker-receipt-container
 docker rm docker-receipt-container
