@@ -19,14 +19,14 @@ public class ReceiptProcessor {
 
     public UUID processReceipt(Receipt receipt) {
         receipts.add(receipt);
-        System.out.println(receipt.getId());
         return receipt.getId();
     }
 
     public int getPoints(UUID id) {
         Receipt receipt = receipts.stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow();
+                .findFirst()
+                .orElseThrow(ReceiptNotFoundException::new);
         return calculate(receipt);
     }
 
